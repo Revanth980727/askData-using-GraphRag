@@ -36,10 +36,12 @@ def execute_sql_query(engine, query):
     try:
         with engine.connect() as connection:
             result = connection.execute(text(query))
-            result_set = [dict(row) for row in result]  # Convert the result to a list of dictionaries
+            # Use row._mapping to ensure compatibility
+            result_set = [dict(row._mapping) for row in result]  # Convert the result to a list of dictionaries
         return result_set
     except Exception as e:
         return str(e)  # Return the error if any occurs
+
 
 # Function to get sample data from a table
 def get_sample_data(engine, table_name, limit=5):
@@ -49,7 +51,8 @@ def get_sample_data(engine, table_name, limit=5):
     query = text(f"SELECT * FROM {table_name} LIMIT {limit}")
     with engine.connect() as connection:
         result = connection.execute(query)
-        sample_data = [dict(row) for row in result]
+        # Use row._mapping to ensure compatibility
+        sample_data = [dict(row._mapping) for row in result]
     
     return sample_data
 
