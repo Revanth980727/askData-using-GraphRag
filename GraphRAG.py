@@ -1,7 +1,7 @@
-streamlit as st
+import streamlit as st
 from sqlalchemy import create_engine, MetaData, text
 from langchain.chat_models import ChatOpenAI
- networkx as nx
+networkx as nx
 
 # Replace with your actual MySQL credentials
 DATABASE_URL = "mysql+pymysql://USER:Password@localhost:3306/Database"
