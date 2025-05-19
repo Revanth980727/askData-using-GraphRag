@@ -1,8 +1,3 @@
-
-# Test Graph RAG implementation
-def graph_function():
-    G = nx.Graph()
-    return G
 import streamlit as st
 from sqlalchemy import create_engine, MetaData, text
 from langchain.chat_models import ChatOpenAI
@@ -562,5 +557,4 @@ with tabs[2]:
         chart_type = st.selectbox("Select Chart Type", options=["line", "bar", "pie", "scatter"])
         plot_data_visualization(df, chart_type)
     else:
-import networkx as nx
         st.warning("No query results available for visualization.")
