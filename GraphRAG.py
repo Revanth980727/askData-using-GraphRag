@@ -1,15 +1,11 @@
-++ fixed
+
 from langchain.chat_models import ChatOpenAI
-import networkx 
 import networkx as nx
+
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
-    kg.add_node(table_name, label='table', columns=list(table.columns.keys()))
-
-++ b/GraphRAG.py
-
-# Correct import for networkx
 import networkx as nx
+from forrea import examples
 
 # When creating the knowledge graph
 for table_name, table in metadata.tables.items():
@@ -25,6 +21,11 @@ for table_name, table in metadata.tables.items():
         }
 
     # Add edges based on foreign key relationships
+    for column in table.columns:
+        if column.foreign_keys:
+            for fk in column.foreign_keys:
+                related_table = fk.column.table.name
+                kg.add_edge(related_table, table_name, relationship='foreign_key')
     for column in table.columns:
         if column.foreign_keys:
             for fk in column.foreign_keys:
