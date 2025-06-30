@@ -1,10 +1,6 @@
-++ GraphRAG.py
 from sqlalchemy import create_engine, MetaData, text
 from langchain.chat_models import ChatOpenAI
-import networkx
-import networkx as nx
-++ b/GraphRAG.py
-import networkx as nx
+import networkx 
 DATABASE_URL = "mysql+pymysql://USER:Password@localhost:3306/Database"
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
@@ -15,8 +11,7 @@ DB_HOST = 'localhost'
 DB_USER = ''
 DB_PASSWORD = ''
 DB_NAME = ''
-++ b/GraphRAG.py
-import networkx as nx
+
 
 # Initialize the GPT-4 model using ChatOpenAI from LangChain
 chat_openai = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key='')
