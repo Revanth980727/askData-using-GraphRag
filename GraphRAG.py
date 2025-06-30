@@ -1,31 +1,35 @@
-from sqlalchemy import create_engine, MetaData, text
+++ fixed
 from langchain.chat_models import ChatOpenAI
 import networkx 
-DATABASE_URL = "mysql+pymysql://USER:Password@localhost:3306/Database"
+import networkx as nx
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
     kg.add_node(table_name, label='table', columns=list(table.columns.keys()))
 
+++ b/GraphRAG.py
 
-DB_HOST = 'localhost'
-DB_USER = ''
-DB_PASSWORD = ''
-DB_NAME = ''
+# Correct import for networkx
+import networkx as nx
 
+# When creating the knowledge graph
+for table_name, table in metadata.tables.items():
+    # Add each table as a node
+    kg.add_node(table_name, label='table', columns=list(table.columns.keys()))
 
-# Initialize the GPT-4 model using ChatOpenAI from LangChain
-chat_openai = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key='')
+    # Add column metadata, including data type
+    for column in table.columns:
+        kg.nodes[table_name][f'col_{column.name}'] = {
+            'type': str(column.type),  # Include column data type
+            'primary_key': column.primary_key,
+            'nullable': column.nullable
+        }
 
-# Initialize the NetworkX graph
-kg = nx.DiGraph()
-
-# Store conversation history
-if 'conversation_history' not in st.session_state:
-    st.session_state.conversation_history = []
-
-
-
-# SQL Query Execution Function
+    # Add edges based on foreign key relationships
+    for column in table.columns:
+        if column.foreign_keys:
+            for fk in column.foreign_keys:
+                related_table = fk.column.table.name
+                kg.add_edge(related_table, table_name, relationship='foreign_key')
 def execute_sql_query(engine, query):
     """
     Execute the generated SQL query and return the results.
