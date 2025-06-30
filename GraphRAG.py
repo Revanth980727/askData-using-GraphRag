@@ -1,20 +1,22 @@
-import streamlit as st
+++ GraphRAG.py
 from sqlalchemy import create_engine, MetaData, text
 from langchain.chat_models import ChatOpenAI
 import networkx
-
-# Replace with your actual MySQL credentials
+import networkx as nx
+++ b/GraphRAG.py
+import networkx as nx
 DATABASE_URL = "mysql+pymysql://USER:Password@localhost:3306/Database"
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
-metadata.reflect(bind=engine)
+    kg.add_node(table_name, label='table', columns=list(table.columns.keys()))
 
 
 DB_HOST = 'localhost'
 DB_USER = ''
 DB_PASSWORD = ''
 DB_NAME = ''
-
+++ b/GraphRAG.py
+import networkx as nx
 
 # Initialize the GPT-4 model using ChatOpenAI from LangChain
 chat_openai = ChatOpenAI(model_name="gpt-4", temperature=0, openai_api_key='')
