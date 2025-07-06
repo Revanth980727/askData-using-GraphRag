@@ -1,6 +1,7 @@
 import streamlit as st
 from sqlalchemy import create_engine, MetaData, text
 from langchain.chat_models import ChatOpenAI
+import networkx
 
 # Replace with your actual MySQL credentials
 DATABASE_URL = "mysql+pymysql://USER:Password@localhost:3306/Database"
@@ -557,8 +558,3 @@ with tabs[2]:
         plot_data_visualization(df, chart_type)
     else:
         st.warning("No query results available for visualization.")
-
-++ GraphRAG.py
-import networkx as nx
-++ GraphRAG.py
-import networkx as nx
